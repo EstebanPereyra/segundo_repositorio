@@ -1,6 +1,7 @@
 import CartWidget from "./CartWidget.js"
 
-const NavBar = () =>
+const NavBar = () => {
+    return (
 
     <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div className="container-fluid">
@@ -22,7 +23,7 @@ const NavBar = () =>
             </div>
         </div>
     </nav>
-
+)}
 
 
 export default NavBar
