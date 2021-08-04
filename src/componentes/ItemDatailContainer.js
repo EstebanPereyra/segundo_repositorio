@@ -6,28 +6,24 @@ const ItemDetailContainer = () => {
 
 const [prod, setProducts] = useState([])
 
+
 //Este efecto se ejecuta SOLO en el primer render
 useEffect(() => {
-    obtenerDatos()} , [])
+    obtenerDatos()}, [])
 
 const obtenerDatos = () => {
     fetch('https://fakestoreapi.com/products?limit=5')
     .then(res=>res.json())
-    .then(json=>console.log(json))
-    // .then(json=> { 
-    //     const {data = []} = json
-    //     setProducts(data)
-    // })
-const getItems = () => {
-    return(prod);
-}
-
+    .then(json=> setProducts(json));
+    // const {data = []} = json
+    // setProducts(data)   
+      
 }
 return (
     <>
-    {console.log(prod)}
        <div className="container mt-5 mb-5">
-           <ItemDetail/> 
+            {prod.map(producto=> {
+            return <ItemDetail producto={producto}/>})}
         </div>
     </>)    
     }

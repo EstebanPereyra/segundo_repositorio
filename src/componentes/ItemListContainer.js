@@ -1,10 +1,12 @@
 import React , {useEffect,useState} from "react";
 import {p} from "./productos"
 import ItemList from "./ItemList"
+import { useParams } from "react-router-dom";
 
 const ItemListContainer = () => {
 
   const [productos,setUsuarios] = useState([])
+  const params = useParams();
   
   //Este efecto se ejecuta por CADA render
   //useEffect(()=>{})
