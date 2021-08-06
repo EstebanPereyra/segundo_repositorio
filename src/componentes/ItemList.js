@@ -8,7 +8,7 @@ const ItemList = ({productos}) => {
   return (
     <div className="d-flex justify-content-center flex-wrap">
         {productos.map(producto=>{
-          return <Item producto={producto} stock={5} initial={1} onAdd={onAdd}/>
+          return <Item key={producto.id} producto={producto} stock={5} initial={1} onAdd={onAdd}/>
         })}
     </div>
     

@@ -9,13 +9,14 @@ const App = () => {
     return (
     <>
         <BrowserRouter>
-        <Header/>       
-        <ItemListContainer/>
-        <ItemCount/>
-        <ItemDetailContainer/>
-        {/* <Switch>
-            <Route path="/" component={ItemDetailContainer} exact/>
-        </Switch> */}
+            <Header/>       
+            {/* <ItemCount/> */}
+            <Switch>
+                <Route path="/" component={ItemListContainer} exact/>
+                <Route path="/categoria/1" component={ItemListContainer}/>
+                <Route path="/categoria/2" component={ItemListContainer}/>
+            </Switch>
+            <ItemDetailContainer/>
         </BrowserRouter>
     </>
 )}

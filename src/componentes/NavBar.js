@@ -16,6 +16,12 @@ const NavBar = () => {
                         <Link className="nav-link active" aria-current="page" to="/">Inicio</Link>
                     </li>
                     <li className="nav-item">
+                        <Link className="nav-link active" aria-current="page" to="/categoria/1">Categoria 1</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link active" aria-current="page" to="/categoria/2">Categoria 2</Link>
+                    </li>
+                    <li className="nav-item">
                         <a className="nav-link" href="#">
                             <CartWidget />
                         </a>
