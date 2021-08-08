@@ -13,10 +13,8 @@ const App = () => {
             {/* <ItemCount/> */}
             <Switch>
                 <Route path="/" component={ItemListContainer} exact/>
-                <Route path="/categoria/1" component={ItemListContainer}/>
-                <Route path="/categoria/2" component={ItemListContainer}/>
+                <Route path="/categoria/:categoria" component={ItemListContainer}/>
             </Switch>
-            <ItemDetailContainer/>
         </BrowserRouter>
     </>
 )}

@@ -7,6 +7,7 @@ const ItemListContainer = () => {
 
   const [productos,setUsuarios] = useState([])
   const params = useParams();
+  console.log(params)
   
   //Este efecto se ejecuta por CADA render
   //useEffect(()=>{})
@@ -16,15 +17,24 @@ const ItemListContainer = () => {
     
     const promise = new Promise((resolve,reject)=>{
       setTimeout(()=>{
-        resolve(productos)
+         resolve(productos)    
       },2000)
     })
-
-    promise.then((productos)=>setUsuarios(p))
-  
+      //promise.then((productos)=>setUsuarios(p))  
+      promise
+      .then((productos)=>{
+        if(params.categoria){
+            setUsuarios(p.filter(prod=>prod.categoria === params.categoria))
+        }else{
+            setUsuarios(p)
+        }
+      })
+      .catch (err => {
+        console.log("error")
+      })
   },[])
 
-  
+
   return (
     <div>
       <ItemList productos={productos}/>
