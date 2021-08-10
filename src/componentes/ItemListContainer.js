@@ -7,32 +7,35 @@ const ItemListContainer = () => {
 
   const [productos,setUsuarios] = useState([])
   const params = useParams();
-  console.log(params)
-  
+    
   //Este efecto se ejecuta por CADA render
   //useEffect(()=>{})
 
   //Este efecto se ejecuta SOLO en el primer render
   useEffect(()=>{
     
-    const promise = new Promise((resolve,reject)=>{
-      setTimeout(()=>{
-         resolve(productos)    
-      },2000)
+    const promesa = getItem()
+    promesa.then(json=> {
+      setUsuarios(json)
     })
-      //promise.then((productos)=>setUsuarios(p))  
-      promise
-      .then((productos)=>{
-        if(params.categoria){
-            setUsuarios(p.filter(prod=>prod.categoria === params.categoria))
-        }else{
-            setUsuarios(p)
-        }
+  }, [params.categoria])
+
+    const getItem = () => {
+
+
+      const promesa = new Promise ((res, rej) => {
+        setTimeout(() => {
+
+          if(params.categoria) {
+            res(p.filter(producto => producto.categoria == params.categoria))
+          } else {
+            res(p)
+          }
+
+        }, 2000)
       })
-      .catch (err => {
-        console.log("error")
-      })
-  },[])
+      return promesa;
+    }
 
 
   return (

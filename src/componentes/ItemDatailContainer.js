@@ -1,27 +1,45 @@
 import React, {useState, useEffect} from "react";
 import ItemDetail from "./ItemDetail"
+import {p} from "./productos"
+import { useParams } from "react-router-dom";
+
 
 const ItemDetailContainer = () => {
 
+  const onAdd = (cantidad) => {
+  console.log(`Has agregado al carrito ${cantidad} producto/s`) }
 
-const [prod, setProducts] = useState([])
-
-
-//Este efecto se ejecuta SOLO en el primer render
-useEffect(() => {
-    obtenerDatos()}, [])
-
-const obtenerDatos = () => {
-    fetch('https://fakestoreapi.com/products?limit=5')
-    .then(res=>res.json())
-    .then(json=> setProducts(json));
+    const [prod, setProducts] = useState([])
+    const id = useParams();
+    console.log(id);
+    
+    useEffect(()=>{
       
-}
-return (
+      const promesa = getItem()
+      promesa.then(json=> {
+          setProducts(json)
+      })
+    }, [id])
+  
+      const getItem = () => {
+  
+  
+        const promesa = new Promise ((res, rej) => {
+          setTimeout(() => {
+  
+            if(id.id) {
+              res(p.filter(producto => producto.id == id.id))}
+              
+          }, 2000)
+        })
+        return promesa;
+      }
+  
+  return (
     <>
-       <div className="container mt-5 mb-5">
+       <div className="container">
             {prod.map(producto=> {
-            return <ItemDetail key={producto.id} producto={producto}/>})}
+            return <ItemDetail key={producto.id} producto={producto} stock={5} initial={1} onAdd={onAdd}/>})}
         </div>
     </>)    
     }

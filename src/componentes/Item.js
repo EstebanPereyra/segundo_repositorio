@@ -1,9 +1,10 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 
 const Item = ({producto, stock, initial, onAdd}) => {
 
   const [contador, setContador] = useState(initial);
-
+  
   const sumarContador = () => {
       if(contador <= stock) {setContador(contador + 1);}
       else {
@@ -40,7 +41,8 @@ const Item = ({producto, stock, initial, onAdd}) => {
         <button className="btn btn-dark m-4" type="submit" onClick={sumarContador}>+</button>
       </div>
       <div className="d-grid gap-2">
-        <button className="btn btn-dark" onClick={confirmar} type="button">Agregar al Carrito</button>
+        <button className="btn btn-dark m-2 p-1" onClick={confirmar} type="button">Agregar al Carrito</button>
+        <Link className="btn btn-dark m-2 p-1" type="button" to={`/item/${producto.id}`}>Ver Detalles</Link>
       </div>
   </div>
 </>
