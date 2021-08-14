@@ -2,28 +2,18 @@ import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ItemCount from './ItemCount'
+// import contexto from "./context/cartContext";
 
 
 const ItemDetail = ({ producto }) => {
 
 
-    // const [confirmacion, setConfirmacion] = useState(false)
-    // const [cantidad, setCantidad] = useState(0)
-
-    // const onAdd = (cantidad) => {
-    //     setConfirmacion(true)
-    //     setCantidad(cantidad)
-    // }
-
-    // const guardarProductos = () => {
-    //     addItem(producto, cantidad)
-    // }
-
+    const [confirmacion, setConfirmacion] = useState(false)
+    const [cantidad, setCantidad] = useState(0)
 
     const onAdd = (cantidad) => {
-        console.log("State Uplifting")
-        console.log("Recibi la cantidad de un componente hijo")
-        console.log(cantidad)
+        setConfirmacion(true)
+        setCantidad(cantidad)
     }
 
     return (
@@ -49,9 +39,13 @@ const ItemDetail = ({ producto }) => {
                                     </div>
                                     <p className="about text-center">{producto.description}</p>
                                     <div className="d-grid gap-2">
-                                        <ItemCount stock={producto.stock} initial={producto.stock >= 1 ? 1 : 0} onAdd={onAdd} />
-                                        <button className="btn btn-dark">Confirmar compra</button>
-                                        <Link className="btn btn-dark m-2 p-1" type="button" to="/">Volver al inicio</Link>
+                                    {!confirmacion ? <ItemCount onAdd={onAdd} stock={producto.stock} initial={producto.stock >= 1 ? 1 : 0}/> 
+                                    : (
+                                    <button>
+                                        <Link className="btn btn-dark m-4" to="/cart">Terminar mi compra</Link>
+                                    </button>
+                                     )
+                                     }
                                     </div>
 
                                 </div>
