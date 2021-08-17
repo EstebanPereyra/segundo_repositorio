@@ -1,8 +1,8 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import ItemCount from './ItemCount'
-// import contexto from "./context/cartContext";
+import contexto from "../contexto/contexto";
 
 
 const ItemDetail = ({ producto }) => {
@@ -10,10 +10,15 @@ const ItemDetail = ({ producto }) => {
 
     const [confirmacion, setConfirmacion] = useState(false)
     const [cantidad, setCantidad] = useState(0)
+    const {addItem} = useContext(contexto)
 
     const onAdd = (cantidad) => {
         setConfirmacion(true)
         setCantidad(cantidad)
+    }
+
+    const guardarProductos = () => {
+        addItem(producto, cantidad)
     }
 
     return (
@@ -41,7 +46,7 @@ const ItemDetail = ({ producto }) => {
                                     <div className="d-grid gap-2">
                                     {!confirmacion ? <ItemCount onAdd={onAdd} stock={producto.stock} initial={producto.stock >= 1 ? 1 : 0}/> 
                                     : (
-                                    <button>
+                                    <button onClick={guardarProductos}>
                                         <Link className="btn btn-dark m-4" to="/cart">Terminar mi compra</Link>
                                     </button>
                                      )
