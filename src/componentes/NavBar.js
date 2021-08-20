@@ -22,9 +22,9 @@ const NavBar = () => {
                         <Link className="nav-link active" aria-current="page" to="/categoria/2">Categoria 2</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">
+                        <Link className="nav-link" to="/cart">
                             <CartWidget />
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>
