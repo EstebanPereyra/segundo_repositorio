@@ -1,46 +1,58 @@
-import React , {useEffect,useState} from "react";
-import {p} from "./productos"
+import React, { useEffect, useState } from "react";
+import { firestore } from "../firebase";
 import ItemList from "./ItemList"
 import { useParams } from "react-router-dom";
 
 const ItemListContainer = () => {
 
-  const [productos,setUsuarios] = useState([])
+  const [productos, setProductos] = useState([])
   const params = useParams();
-    
-  //Este efecto se ejecuta por CADA render
-  //useEffect(()=>{})
 
-  //Este efecto se ejecuta SOLO en el primer render
-  useEffect(()=>{
-    
-    const promesa = getItem()
-    promesa.then(json=> {
-      setUsuarios(json)
-    })
-  }, [params.categoria])
+  useEffect(() => {
 
-    const getItem = () => {
+    const db = firestore
+
+    const collection = db.collection("productos")
 
 
-      const promesa = new Promise ((res, rej) => {
-        setTimeout(() => {
+    if (!params.categoria) {
+      const query = collection.get();
+      query
+        .then((resultados) => {
 
-          if(params.categoria) {
-            res(p.filter(producto => producto.categoria == params.categoria))
-          } else {
-            res(p)
-          }
+          const resultado_parseado = [];
+          resultados.forEach((documento) => {
+            const id = documento.id;
+            const data = documento.data();
+            const data_final = { id, ...data };
 
-        }, 2000)
-      })
-      return promesa;
+            resultado_parseado.push(data_final);
+          });
+
+          setProductos(resultado_parseado);
+
+        })
+
+    } else {
+
+      let query = collection.where("categoria", "==", params.categoria)
+
+      query = query.get()
+      query
+        .then((snapshot) => {
+          const documentos = snapshot.docs
+          const productos = documentos.map((doc) => {
+            return { id: doc.id, ...doc.data() }
+          })
+          setProductos(productos)
+        })
+
     }
-
+  }, [params.categoria])
 
   return (
     <div>
-      <ItemList productos={productos}/>
+      <ItemList productos={productos} />
     </div>
   )
 }

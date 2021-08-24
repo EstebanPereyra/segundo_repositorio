@@ -5,7 +5,7 @@ import ItemCount from './ItemCount'
 import contexto from "../contexto/contexto";
 
 
-const ItemDetail = ({ producto }) => {
+const ItemDetail = ({ prod }) => {
 
 
     const [confirmacion, setConfirmacion] = useState(false)
@@ -18,7 +18,7 @@ const ItemDetail = ({ producto }) => {
     }
 
     const guardarProductos = () => {
-        addItem(producto, cantidad)
+        addItem(prod, cantidad)
     }
 
     return (
@@ -30,24 +30,24 @@ const ItemDetail = ({ producto }) => {
                             <div className="col-md-6">
                                 <div className="images p-0">
                                     <div className="text-center p-0">
-                                        <img id="main-image" src={producto.pictureUrl} className="card-img-top" />
+                                        <img id="main-image" src={prod.pictureUrl} className="card-img-top" />
                                     </div>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="product p-4">
                                     <div className="mt-4 mb-3 text-center">
-                                        <h5 className="text-uppercase text-center">{producto.title}</h5>
+                                        <h5 className="text-uppercase text-center">{prod.title}</h5>
                                         <div className="price d-flex flex-row align-items-center text-center">
-                                            <span className="act-price"><b>PRECIO:</b> ${producto.price}</span>
+                                            <span className="act-price"><b>PRECIO:</b> ${prod.price}</span>
                                         </div>
                                     </div>
-                                    <p className="about text-center">{producto.description}</p>
+                                    <p className="about text-center">{prod.description}</p>
                                     <div className="d-grid gap-2">
-                                    {!confirmacion ? <ItemCount onAdd={onAdd} stock={producto.stock} initial={producto.stock >= 1 ? 1 : 0}/> 
+                                    {!confirmacion ? <ItemCount onAdd={onAdd} stock={prod.stock} initial={prod.stock >= 1 ? 1 : 0}/> 
                                     : (
                                     <button onClick={guardarProductos}>
-                                        <Link className="btn btn-dark m-4" to="/cart">Terminar mi compra</Link>
+                                        <Link key={prod.id} className="btn btn-dark m-4" to="/cart">Terminar mi compra</Link>
                                     </button>
                                      )
                                      }
