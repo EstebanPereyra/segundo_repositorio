@@ -3,7 +3,6 @@ import ItemDetail from "./ItemDetail"
 import { firestore } from "../firebase";
 import { useHistory, useParams } from "react-router-dom";
 
-
 const ItemDetailContainer = () => {
 
     const onAdd = (cantidad) => {
@@ -15,9 +14,8 @@ const ItemDetailContainer = () => {
     const history = useHistory()
 
 
+
     useEffect(() => {
-
-
         const db = firestore;
         const collection = firestore.collection("productos");
         let detalle = collection.doc(id).get()
@@ -33,6 +31,8 @@ const ItemDetailContainer = () => {
                 console.log(err)
             })
     }, [])
+
+
 
     return (
         <div>

@@ -13,7 +13,7 @@ const Item = ({producto}) => {
           <p className="card-text text-center">Precio: ${producto.price}</p>
       </div>
       <div className="d-grid gap-2">
-        <Link className="btn btn-dark m-2 p-1" type="button" to={`/item/${producto.id}`}>Ver Detalles</Link>
+        <Link key={producto.id} className="btn btn-dark m-2 p-1" type="button" to={`/item/${producto.id}`}>Ver Detalles</Link>
       </div>
   </div>
 </>
