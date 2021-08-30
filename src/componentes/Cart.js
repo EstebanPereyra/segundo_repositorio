@@ -82,7 +82,7 @@ const Cart = () => {
 
             {
 
-                <Form key={ordenes.producto} id={1} title={'Producto de prueba'} price={1000} total={2000} date={new Date()} />
+                <Form key={ordenes.producto} />
 
             }
 

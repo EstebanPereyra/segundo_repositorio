@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { firestore } from "../firebase";
+import contexto from "../contexto/contexto";
 
 const Form = ({ id, title, price, total, date }) => {
 
@@ -8,7 +9,16 @@ const Form = ({ id, title, price, total, date }) => {
     const [email, setEmail] = useState("");
     const [telefono, setTelefono] = useState("");
     const [error, setError] = useState(false);
-
+    const { ordenes } = useContext(contexto)
+    
+console.log(ordenes)
+    const precioTotal = () => {
+        ordenes.map(element => {
+            return (
+            element.producto.price * element.producto.cantidad)
+        });
+    }
+// console.log(precioTotal)
 
     const guardarNombre = (e) => {
         console.log('Nombre guardado');
@@ -38,12 +48,12 @@ const Form = ({ id, title, price, total, date }) => {
         setTelefono(valor);
     }
 
+
     const realizarPedido = () => {
         if (validarCampos()) {
             const db = firestore;
             const collection = db.collection("ordenes")
-            const bayer = { nombre: nombre, apellido: apellido, email: email, telefono: telefono }
-            // const bayer = { usuario: [`${nombre}, ${apellido}, ${email}, ${telefono}`], items: [`${id},${title},${price}`], total, date }
+            const bayer = { usuario: {nombre: nombre, apellido: apellido, email: email, telefono: telefono}, items: [...ordenes], date: new Date()  }
             const query = collection.add(bayer);
             setError(false);
             console.log("Datos validados correctamente")
