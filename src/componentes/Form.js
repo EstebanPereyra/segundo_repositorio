@@ -42,7 +42,8 @@ const Form = ({ id, title, price, total, date }) => {
         if (validarCampos()) {
             const db = firestore;
             const collection = db.collection("ordenes")
-            const bayer = { usuario: [`${nombre}, ${apellido}, ${email}, ${telefono}`], items: [`${id},${title},${price}`], total, date }
+            const bayer = { nombre: nombre, apellido: apellido, email: email, telefono: telefono }
+            // const bayer = { usuario: [`${nombre}, ${apellido}, ${email}, ${telefono}`], items: [`${id},${title},${price}`], total, date }
             const query = collection.add(bayer);
             setError(false);
             console.log("Datos validados correctamente")
