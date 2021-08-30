@@ -22,7 +22,7 @@ const ItemDetailContainer = () => {
         detalle
             .then(doc => {
                 if (doc.exists) {
-                    setProducts(doc.data())
+                    setProducts({id: doc.id, ...doc.data()})
                 } else {
                     history.push("/")
                 }

@@ -11,36 +11,37 @@ const Cart = () => {
     const [confirmacion, setConfirmacion] = useState(false)
     const [items, setItems] = useState({})
     console.log(ordenes);
-    console.table(items)
+    const [... producto] = ordenes;
+    console.table(producto)
+    const {id} = producto;
+    console.log(producto.producto)
 
-
-    
 
     const mostrarFormulario = () => {
         setConfirmacion(true)
     }
 
-    const guardarItems = () => {
-        let items = [];
-        ordenes.map(element => {
-            items.push(
-            { 
-                id : element.producto.id,
-                title : element.producto.title,
-                price : element.producto.price,
-                total : element.producto.price * element.cantidad, 
-                date : new Date()          
-            })
-        });
-        setItems(items)
-    }
+    //     const guardarItems = () => {
+    //         let items = [];
+    //         ordenes.map(element => {
+    //             items.push(
+    //             { 
+    //                 id : element.producto.id,
+    //                 title : element.producto.title,
+    //                 price : element.producto.price,
+    //                 total : element.producto.price * element.cantidad, 
+    //                 date : new Date()          
+    //             })
+    //         });
+    //         setItems(items)
+    //     }
 
 
-useEffect(() => {
-        if (ordenes.length > 0) {
-            guardarItems();
-        }
-    }, [ordenes]);
+    // useEffect(() => {
+    //         if (ordenes.length > 0) {
+    //             guardarItems();
+    //         }
+    //     }, [ordenes]);
 
 
     return (
@@ -70,24 +71,33 @@ useEffect(() => {
                             <div>
                                 <p>Precio total: {orden.producto.price * orden.cantidad}</p>
                             </div>
-                            <button className="btn btn-dark" onClick={() => removeItem(`${orden.producto.title}`)}>eliminar productos</button>
-                    
+                            <button className="btn btn-dark" onClick={() => removeItem(`${orden.producto.id}`)}>eliminar productos</button>
+
                         </div>
                         <hr></hr>
                     </>
                 )
-                
+
             })}
-           
+
             {
+
+                <Form key={ordenes.producto} id={1} title={'Producto de prueba'} price={1000} total={2000} date={new Date()} />
+
+            }
+
+
+
+            {/* {
                 !confirmacion ? <Link onClick={() => mostrarFormulario()} className="btn btn-dark m-4" to="/cart">Terminar mi compra</Link>
                     : (
-
-                            <Form items={items}/>
-
+                        ordenes.forEach(element => {
+                            return (
+                                <Form id={element.producto.id} title={element.producto.title} price={element.producto.price} total={element.producto.price * element.cantidad} date={new Date()} />)
+                        })
                     )
-            
-            }
+
+            } */}
 
         </div>
     );
