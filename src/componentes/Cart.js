@@ -1,48 +1,18 @@
 import React from 'react';
 import contexto from "../contexto/contexto";
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState} from 'react';
 import { Link } from "react-router-dom"
 import Form from './Form'
 
 
 const Cart = () => {
 
-    const { ordenes, removeItem, clear } = useContext(contexto)
+    const { ordenes, removeItem, getTotal } = useContext(contexto)
     const [confirmacion, setConfirmacion] = useState(false)
-    const [items, setItems] = useState({})
-    console.log(ordenes);
-    const [... producto] = ordenes;
-    console.table(producto)
-    const {id} = producto;
-    console.log(producto.producto)
-
 
     const mostrarFormulario = () => {
         setConfirmacion(true)
     }
-
-    //     const guardarItems = () => {
-    //         let items = [];
-    //         ordenes.map(element => {
-    //             items.push(
-    //             { 
-    //                 id : element.producto.id,
-    //                 title : element.producto.title,
-    //                 price : element.producto.price,
-    //                 total : element.producto.price * element.cantidad, 
-    //                 date : new Date()          
-    //             })
-    //         });
-    //         setItems(items)
-    //     }
-
-
-    // useEffect(() => {
-    //         if (ordenes.length > 0) {
-    //             guardarItems();
-    //         }
-    //     }, [ordenes]);
-
 
     return (
         <div>
@@ -80,24 +50,15 @@ const Cart = () => {
 
             })}
 
+            <p className="text-center">Total de la compra: $ {getTotal()}</p>
+
             {
-
-                <Form key={ordenes.producto} />
-
-            }
-
-
-
-            {/* {
                 !confirmacion ? <Link onClick={() => mostrarFormulario()} className="btn btn-dark m-4" to="/cart">Terminar mi compra</Link>
                     : (
-                        ordenes.forEach(element => {
-                            return (
-                                <Form id={element.producto.id} title={element.producto.title} price={element.producto.price} total={element.producto.price * element.cantidad} date={new Date()} />)
-                        })
+                       <Form />
                     )
 
-            } */}
+            }
 
         </div>
     );

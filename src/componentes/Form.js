@@ -2,23 +2,26 @@ import { useState, useContext } from "react"
 import { firestore } from "../firebase";
 import contexto from "../contexto/contexto";
 
-const Form = ({ id, title, price, total, date }) => {
+const Form = ({id}) => {
 
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
     const [email, setEmail] = useState("");
     const [telefono, setTelefono] = useState("");
     const [error, setError] = useState(false);
-    const { ordenes } = useContext(contexto)
-    
-console.log(ordenes)
-    const precioTotal = () => {
-        ordenes.map(element => {
-            return (
-            element.producto.price * element.producto.cantidad)
-        });
+    const { ordenes, getTotal } = useContext(contexto)
+
+
+    const [...productos] = [...ordenes];
+    console.log(productos)
+    const items = [];
+
+    ordenes.forEach(function(producto) {
+        
+        items.push(producto.producto.id, producto.producto.title, producto.producto.price)
     }
-// console.log(precioTotal)
+
+    )
 
     const guardarNombre = (e) => {
         console.log('Nombre guardado');
@@ -53,7 +56,8 @@ console.log(ordenes)
         if (validarCampos()) {
             const db = firestore;
             const collection = db.collection("ordenes")
-            const bayer = { usuario: {nombre: nombre, apellido: apellido, email: email, telefono: telefono}, items: [...ordenes], date: new Date()  }
+            const bayer = { usuario: {nombre: nombre, apellido: apellido, email: email, telefono: telefono}, items : items, date: new Date(), total:getTotal()  }
+            // const bayer = { usuario: {nombre: nombre, apellido: apellido, email: email, telefono: telefono}, items: [...ordenes], date: new Date(), total:getTotal()  }
             const query = collection.add(bayer);
             setError(false);
             console.log("Datos validados correctamente")

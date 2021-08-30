@@ -36,8 +36,20 @@ const CartProvider = ({children}) => {
         return exists
     }
 
+    function getTotal() {
+        if (ordenes.length > 0) {
+            let total = 0;
+            ordenes.forEach((orden) => {
+                total =
+                    total +
+                    orden.cantidad * orden.producto.price;
+            });
+            return total;
+        }
+    }
+
     return (
-        <Provider value={{ordenes,addItem,removeItem,clear,isInCart}}>
+        <Provider value={{ordenes,addItem,removeItem,clear,isInCart, getTotal}}>
             {children}
         </Provider>
     )
