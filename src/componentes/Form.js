@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 import { firestore } from "../firebase";
 import contexto from "../contexto/contexto";
-import { Link } from "react-router-dom"
+
 
 const Form = ({ id }) => {
 
@@ -109,7 +109,7 @@ const Form = ({ id }) => {
                         <input type="number" placeholder="Teléfono" className="form-control" id="telefono" onChange={guardarTelefono}></input>
                     </div>
                     <div className="col-12">
-                      <Link className="btn btn-dark" type="submit" onClick={realizarPedido} key={id}>TERMINAR LA COMPRA</Link>
+                      <button type="submit" className="btn btn-dark" type="submit" onClick={realizarPedido} key={id}>TERMINAR LA COMPRA</button>
                     </div>
                 </div>
             
