@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Proyecto final del Curso de React - Coderhouse
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![GitHub Profile](https://img.shields.io/badge/GitHub-informational?style=for-the-badge&logo=GitHub&logoColor=171515&color=23272d)](https://github.com/EstebanPereyra)
+[![LinkedId](https://img.shields.io/badge/LinkedIn-informational?style=for-the-badge&logo=linkedin&logoColor=0077b5&color=23272d)](https://www.linkedin.com/in/esteban-josue-pereyra-677348211/)
+[![Contact Me](https://img.shields.io/badge/Email-informational?style=for-the-badge&logo=Mail.Ru&logoColor=fff&color=23272d)](mailto:estebanjosuepereyra@gmail.com)
 
-## Available Scripts
+Este trabajo constituye el proyecto final que he entregado en el curso de ReactJS dictado en el Instituto "CoderHouse", el cual, forma parte de la carrera de desarrollador web full-stack.
+Se trata de una Tienda Virtual utilizando React, React Hooks, React Router, Librería de Bootstrap y Firebase como base de datos.
 
-In the project directory, you can run:
+## Librerias
+## Bootstrap
+[![Bootstrap 5](https://img.shields.io/badge/Bootstrap_5-informational?style=for-the-badge&logo=bootstrap&logoColor=6f42c1&color=23272d)](https://getbootstrap.com)
 
-### `npm start`
+Me he inclinado por utilizar la librería de Bootstrap en cuanto cumple las necesidades de esta capacitación y resulta fácil de implementar. Es que, si bien prefiero utilizar css puro para darle estilos a los sitios web, lo cierto es que, el objetivo de este proyecto es aprender a utilizar ReactJS, por lo que, preferí enfocarme en el temario del mismo y en la maquetación de la aplicación.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Navagación y Componentes
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+A fin de navegar adecuadamente a través del sitio he implementado el router de la librería react-router-dom
 
-### `npm test`
+- La navegacion de la "Tienda Virtual" la determina el componente Link. 
+- La ruta "/" nos lleva al componente ItemListContainer mostrando todos los productos. Es el Home del sitio.
+- La ruta "/categoria/:categoria" también nos dirige al componente "ItemListContainer" pero filtrando los productos por categoria.. En el caso de este proyecto las categorias son dos: 1 y 2.
+- La ruta "/item/:id" nos lleva al componente ItemDetailContainer.
+- La ruta "/cart" nos direcciona al componente Cart, en referencia al "carrito de compras", el cual, puede estar vacío o bien, tener productos agregados.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+El home contiene un componente **"Header"** que contiene otro componente denominado **"NavBar"**. Éste último componente, además del menú de navegación que tiene un estilo simple (Solo tiene un botón de inicio, y dos botones más: categoria 1 y 2), contiene el componente **"CartWidget"** que retorna un ícono de un carrito obtenido de la libreria de íconos de Bootstrap. Además, cuando hay productos en el componente Cart, el ícono de el componente mencionado, muestra su cantidad en el NavBar.
 
-### `npm run build`
+El componente **"ItemListConteiner"** retorna el componente **"ItemList"** y muestra doce (12) productos. Ahora, el si se hace click en en los botones "categoria 1" o "categoría 2" que se encuentran dentro del componente **"NavBar"**, se redirigirá al mismo componente, pero esta vez, los productos estarán filtrados: seis (6) productos pertenecen a la categoría 1 y seis (6) productos a la categoría 2.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Es importante mencionar que el primer componente mencionado en el párrafo anterior contiene la llamada a firebase con una estructura condicional, devolviendo todos los productos o bien, filtrandolos por categoria.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Además, el componente **"Item"** recibirá por props los datos de los productos para mostrarlos en pantalla.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Por su parte, el componente **"ItemDetail"** recibe también por props los datos del producto a través del componente **"ItemDetailConteiner"**, con el objetivo que, el usuario, una vez que haga click en el componente **"Link"** que se encuentra dentro del componente **"Item"** puede acceder a los detalles del producto. Además, el componente **"ItemCount"** se encuentra dentro del componente **ItemDetail** a fin que el usuario pueda agregar o quitar más productos al carrito
 
-### `npm run eject`
+El componente **Cart** contiene el listado de productos seleccionados, la imagen de cada producto, la cantidad de productos elegidos por el usuario, la suma del precio de las unidades y la suma total de todos los productos, un boton para confirmar la compra que nos lleva a el componente **Form**.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+El componente **Form** es un formulario para confirmar la compra, nos pide los datos de contacto del usuario, tiene un boton para confirmar. Al hacer click en el mismo se guardar dentro de firebase en la coleccion "ordenes" los datos del usuario, como también el id, título y precio del producto, el precio total de la compra y la fecha en que se realizo la misma. Asimismo, devuelve un mensaje al usuario en el que se muestra el id de la compra (es el id del primer producto adquirido) realizada dándole un descuento para su próxima compra.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+También he creado un componente **"Footer"** para darle un estilo más amigable al sitio. Dicho componente no tiene ninguna funcionalidad. Lo mismo sucede con el componente **"Loading"**, el cual es un Spinner creado con estilos de Bootrasp a fin que, cuando los datos se están cargando desde firebase muestre un mensaje en pantalla.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Contexts
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Se creó una carpeta denominada "contexto", separada del resto de los componentes donde se utilizó "createContext" de react para poder definir un contexto.
 
-## Learn More
+En dicha carpeta se creó un componente llamado **"CustomProvider"**, el cual define una serié de funciones que luegos son importadas al componente Cart y Form a fin de poder agregar elementos al carrito, borrarlos, sumar el total, etc.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Instrucciones de instalación
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- git clone https://github.com/EstebanPereyra/virtualcomerce
 
-### Code Splitting
+- npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- npm start
