@@ -7,7 +7,7 @@ import Form from './Form'
 
 const Cart = () => {
 
-    const { ordenes, removeItem, getTotal } = useContext(contexto)
+    const { ordenes, removeItem, getTotal} = useContext(contexto)
     const [confirmacion, setConfirmacion] = useState(false)
 
     const mostrarFormulario = () => {
@@ -25,6 +25,7 @@ const Cart = () => {
 
                 return (
                     <div key={orden.producto.id}>
+                        
                         <div className="m-5 p-5 d-flex justify-content-between">
                             <div>
                                 <h3>
@@ -46,6 +47,7 @@ const Cart = () => {
                             <button className="btn btn-dark" onClick={() => removeItem(`${orden.producto.id}`)}>eliminar productos</button>
 
                         </div>
+                        
                         <hr></hr>
                     </div>
 
@@ -54,9 +56,11 @@ const Cart = () => {
             })}
 
                 <h4 className="text-center">{getTotal()}</h4>
-
             {
-                !confirmacion ? <button onClick={() => mostrarFormulario()} className="btn btn-dark m-4">Terminar mi compra</button>
+                !confirmacion ? 
+                <div className="text-center">
+                <button onClick={() => mostrarFormulario()} className="btn btn-dark m-4">Terminar mi compra</button>
+                </div>  
                     : (
                         <>
                             <div>
