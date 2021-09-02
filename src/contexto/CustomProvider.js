@@ -1,19 +1,19 @@
 import { useState } from "react"
-import  {Provider}  from "./contexto"
+import { Provider } from "./contexto"
 
 
-const CartProvider = ({children}) => {
+const CartProvider = ({ children }) => {
 
-    const [ordenes,setOrdenes] = useState([])
-    
+    const [ordenes, setOrdenes] = useState([])
+
 
     const addItem = (producto, cantidad) => {
-        if(!isInCart(producto.id)){
+        if (!isInCart(producto.id)) {
             const orden = {
-                producto:producto,
-                cantidad:cantidad
+                producto: producto,
+                cantidad: cantidad
             }
-            setOrdenes([...ordenes,orden])
+            setOrdenes([...ordenes, orden])
         }
     }
 
@@ -28,8 +28,8 @@ const CartProvider = ({children}) => {
 
     const isInCart = (productoId) => {
         let exists = false
-        ordenes.map(orden=>{
-            if(orden.producto.id === productoId){
+        ordenes.map(orden => {
+            if (orden.producto.id === productoId) {
                 exists = true
             }
         })
@@ -44,12 +44,12 @@ const CartProvider = ({children}) => {
                     total +
                     orden.cantidad * orden.producto.price;
             });
-            return total;
+            return `Su compra total es de $${total}`;
         }
     }
 
     return (
-        <Provider value={{ordenes,addItem,removeItem,clear,isInCart, getTotal}}>
+        <Provider value={{ ordenes, addItem, removeItem, clear, isInCart, getTotal }}>
             {children}
         </Provider>
     )

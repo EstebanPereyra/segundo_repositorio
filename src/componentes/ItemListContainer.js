@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import ItemList from "./ItemList"
 import { useParams } from "react-router-dom";
+import Loading from "./Loading"
 
 const ItemListContainer = () => {
 
   const [productos, setProductos] = useState([])
+  const [loading, setLoading] = useState(true);
   const params = useParams();
 
   useEffect(() => {
@@ -28,10 +30,12 @@ const ItemListContainer = () => {
 
             resultado_parseado.push(data_final);
           });
-
+          
           setProductos(resultado_parseado);
-
         })
+        .finally(() => {
+          setLoading(false); 
+      })
 
     } else {
 
@@ -46,14 +50,20 @@ const ItemListContainer = () => {
           })
           setProductos(productos)
         })
+        .finally(() => {
+          setLoading(false); 
+      })
 
     }
   }, [params.categoria])
 
   return (
+    <>
+    { loading && <Loading/> }
     <div>
       <ItemList productos={productos} />
     </div>
+    </>
   )
 }
 

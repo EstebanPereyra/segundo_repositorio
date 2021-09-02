@@ -30,7 +30,7 @@ const ItemDetail = ({ prod }) => {
                             <div className="col-md-6">
                                 <div className="images p-0">
                                     <div className="text-center p-0">
-                                        <img id="main-image" src={prod.pictureUrl} className="card-img-top" />
+                                        <img id="main-image" src={prod.pictureUrl} className="card-img-top"  alt="producto" />
                                     </div>
                                 </div>
                             </div>

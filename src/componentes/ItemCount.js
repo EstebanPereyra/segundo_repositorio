@@ -6,15 +6,11 @@ const ItemCount = ({ stock, initial, onAdd }) => {
 
     const sumarContador = () => {
         if (contador <= stock) { setContador(contador + 1); }
-        else {
-            // console.log('No hay más stock');
-        }
-
     }
 
     const restarContador = () => {
         if (contador <= 0) {
-            // console.log('No se puede restar más');
+           
         } else {
             setContador(contador - 1);
         }

@@ -4,6 +4,7 @@ import ItemDetailContainer from "./componentes/ItemDatailContainer.js"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import Cart from "./componentes/Cart.js"
 import CustomProvider from "./contexto/CustomProvider"
+import Footer from "./componentes/Footer.js"
 
 const App = () => {
 
@@ -23,6 +24,7 @@ const App = () => {
                         <Route path="/cart" component={Cart} />
 
                     </Switch>
+                    <Footer />
                 </BrowserRouter>
             </CustomProvider>
         </>

@@ -2,7 +2,7 @@ import React from "react"
 import Item from "./Item"
 
 const ItemList = ({productos}) => {
-  console.log(productos)
+  
   const onAdd = (cantidad) => {
   console.log(`Has agregado al carrito ${cantidad} producto/s`) }
   return (
