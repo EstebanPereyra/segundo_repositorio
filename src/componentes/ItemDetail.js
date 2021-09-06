@@ -12,6 +12,7 @@ const ItemDetail = ({ prod }) => {
     const [cantidad, setCantidad] = useState(0)
     const {addItem} = useContext(contexto)
 
+
     const onAdd = (cantidad) => {
         setConfirmacion(true)
         setCantidad(cantidad)
@@ -20,6 +21,7 @@ const ItemDetail = ({ prod }) => {
     const guardarProductos = () => {
         addItem(prod, cantidad)
     }
+
 
     return (
         <>
@@ -46,8 +48,11 @@ const ItemDetail = ({ prod }) => {
                                     <div className="d-grid gap-2">
                                     {!confirmacion ? <ItemCount onAdd={onAdd} stock={prod.stock} initial={prod.stock >= 1 ? 1 : 0}/> 
                                     : (
-                                    <button onClick={guardarProductos}>
-                                        <Link key={prod.id} className="btn btn-dark m-4" to="/cart">Terminar mi compra</Link>
+                                    <button  key={prod.id}>
+                                        <Link type="submit" onClick={guardarProductos} className="btn btn-dark m-4" to="#">Agregar al carrito</Link>
+                                        <Link className="btn btn-dark m-4" to="/cart">Ir al carrito</Link>
+                                        <Link className="btn btn-dark m-4" to="/">Seguir comprando</Link>
+
                                     </button>
                                      )
                                      }

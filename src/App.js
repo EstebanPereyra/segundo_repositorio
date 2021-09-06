@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 import Cart from "./componentes/Cart.js"
 import CustomProvider from "./contexto/CustomProvider"
 import Footer from "./componentes/Footer.js"
+import ItemDetail from "./componentes/ItemDetail.js"
 
 const App = () => {
 
@@ -22,6 +23,8 @@ const App = () => {
                         <Route path="/item/:id" component={ItemDetailContainer} />
 
                         <Route path="/cart" component={Cart} />
+
+                        <Route path="/itemdetail" component={ItemDetail} />
 
                     </Switch>
                     <Footer />
